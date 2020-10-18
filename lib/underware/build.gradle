@@ -1,0 +1,9 @@
+apply from: rootProject.file("gradle/idea.gradle")
+apply from: rootProject.file("gradle/kotlin.gradle")
+apply from: rootProject.file("gradle/dependencies.gradle")
+
+dependencies {
+    implementation jacksonJson
+}
+
+

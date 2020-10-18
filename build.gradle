@@ -1,0 +1,50 @@
+buildscript {
+    apply from: rootProject.file("gradle/dependencies.gradle")
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+plugins {
+    id "idea"
+}
+
+idea {
+    project {
+        jdkName = "${jvmVersion}"
+        languageLevel = "${jvmVersion}"
+    }
+}
+
+allprojects {
+    buildDir = "target"
+    tasks.withType(JavaForkOptions) {
+        // Forked processes like GradleWorkerMain for tests won't steal focus!
+        jvmArgs '-Djava.awt.headless=true'
+    }
+}
+
+wrapper {
+    gradleVersion = "${project.gradleVersion}"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+// From http://jdpgrailsdev.github.io/blog/2014/10/28/gradle_resolve_all_dependencies.html
+// Used by the ./bin/update script to ensure a git checkout can be built when offline
+task resolveDependencies {
+    doLast {
+        project.rootProject.allprojects.forEach { project ->
+            project.buildscript.configurations.forEach { configuration ->
+                configuration.resolve()
+            }
+            project.configurations.forEach { configuration ->
+                configuration.resolve()
+            }
+        }
+    }
+}

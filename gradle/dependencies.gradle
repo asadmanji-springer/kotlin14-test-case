@@ -1,0 +1,22 @@
+ext.gradleVersion = "6.4"
+ext.jacksonVersion = "2.10.5"
+ext.jvmVersion = "1.8"
+ext.kotlinVersion = "1.4.10"
+
+ext.libraries = [
+    "hamkrest"               : "com.natpryce:hamkrest:1.7.0.0",
+    "jackson"                : "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+    "jsr-305"                : "com.google.code.findbugs:jsr305:3.0.2",
+    "junit"                  : "junit:junit:4.12",
+    // Note: Version of Kotlin libraries is defined by `kotlin-gradle` plug-in.
+    "kotlin"                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+    "kotlin-reflect"         : "org.jetbrains.kotlin:kotlin-reflect",
+]
+
+ext {
+    jacksonJson = [
+        libraries["jackson"],
+        "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+        "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    ]
+}

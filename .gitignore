@@ -1,0 +1,16 @@
+# Gradle
+.gradle/
+target/
+buildSrc/build
+
+# IntelliJ IDEA
+.idea/*
+!.idea/runConfigurations/
+!.idea/codeStyles/
+!.idea/dataSources.local.xml
+!.idea/dataSources.xml
+out/
+*.iml
+
+# Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
